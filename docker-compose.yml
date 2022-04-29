@@ -6,7 +6,6 @@ services:
       context: api
       dockerfile: Dockerfile
     working_dir: /api
-    command: sh -c 'yarn generate-doc && yarn watch'
     volumes:
       - ./api:/usr/src/api
       - api_node_modules:/usr/src/api/node_modules
