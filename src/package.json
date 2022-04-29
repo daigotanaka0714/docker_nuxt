@@ -11,7 +11,8 @@
     "lint:style": "stylelint \"**/*.{css,scss,sass,html,vue}\" --ignore-path .gitignore",
     "lint:prettier": "prettier --check .",
     "lint": "yarn lint:js && yarn lint:style && yarn lint:prettier",
-    "lint:fix": "prettier --write --list-different . && yarn lint:js --fix && yarn lint:style --fix"
+    "lint:fix": "prettier --write --list-different . && yarn lint:js --fix && yarn lint:style --fix",
+    "upgrade:yarn:interactive": "yarn upgrade-interactive --latest"
   },
   "dependencies": {
     "@nuxt/content": "^1.15.1",
@@ -43,5 +44,6 @@
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-recommended-vue": "^1.1.0",
     "stylelint-config-standard": "^24.0.0"
-  }
+  },
+  "packageManager": "yarn@3.2.0"
 }
