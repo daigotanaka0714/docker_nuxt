@@ -1,13 +1,38 @@
 version: '3.8'
 
 services:
+  api:
+    build:
+      context: api
+      dockerfile: Dockerfile
+    working_dir: /api
+    command: sh -c 'yarn generate-doc && yarn watch'
+    volumes:
+      - ./api:/usr/src/api
+      - api_node_modules:/usr/src/api/node_modules
+    ports:
+      - 4000:4000
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    tty: true
+    # depends_on:
+      # - db
+
+  # db:
+  #   image: postgres:14
+  #   environment:
+  #     POSTGRES_USER: admin
+  #     POSTGRES_PASSWORD: admin
+  #     POSTGRES_DB: test
+  #   volumes:
+  #     - postgres:/var/lib/postgresql/data
   client:
     build:
-      context: .
+      context: src
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
-    working_dir: "/src"
+    working_dir: /src
     volumes:
       - "./src:/src"
       - node_modules_volume:/src/node_modules
@@ -18,5 +43,8 @@ services:
     - NODE_ENV=development
     - NODE_OPTIONS=--openssl-legacy-provider
     command: './scripts/compose_command.bash'
+    depends_on:
+      - api
 volumes:
   node_modules_volume:
+  api_node_modules:
